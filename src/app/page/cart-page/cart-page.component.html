@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            <div class="cart-title mt-50">
+                <h2>Shopping Cart</h2>
+            </div>
+
+            <div class="cart-table clearfix">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <div class="text-center my-4" *ngIf="productCartDetail.length < 1">
+                        <h2>Cart is empty</h2>
+                        <button class="btn amado-btn w-50" routerLink="/shop">Let's shopping</button>
+                    </div>
+                    <tbody *ngIf="productCartDetail">
+                        <tr *ngFor="let item of productCartDetail; let i = index">
+                            <td class="cart_product_img">
+                                <a><img [src]="item.productId.image" alt="Product" /></a>
+                            </td>
+                            <td class="cart_product_desc">
+                                <h5>{{ item.productId.title }}</h5>
+                            </td>
+                            <td class="price">
+                                <span>{{ item.productId.price | currency : "USD" }}</span>
+                            </td>
+                            <td class="qty">
+                                <!-- <span (click)="removeCartItem(item.productId.id)">X</span> -->
+                                <div class="qty-btn d-flex">
+                                    <p>Qty</p>
+                                    <div class="quantity">
+                                        <span (click)="subQty(item.productId.id, i)" class="qty-minus"><i class="fa fa-minus" aria-hidden="true"></i
+                    ></span>
+                                        <input [(ngModel)]="item.qty" #qty.value="ngModel" type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" [value]="item.quantity" />
+                                        <span (click)="addQty(item.productId.id, i)" class="qty-plus"><i class="fa fa-plus" aria-hidden="true"></i
+                    ></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="cart-summary">
+                <h5>Cart Total</h5>
+                <ul class="summary-table">
+                    <li>
+                        <span>subtotal:</span>
+                        <span>{{ totalPrice | currency : "USD" }}</span>
+                    </li>
+                    <li><span>delivery:</span> <span>Free</span></li>
+                    <li>
+                        <span>total:</span> <span>{{ totalPrice | currency : "USD" }}</span>
+                    </li>
+                </ul>
+                <div class="cart-btn mt-100">
+                    <a class="btn amado-btn w-100" (click)="checkOutSubmit()">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

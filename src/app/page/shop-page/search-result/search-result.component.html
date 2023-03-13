@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="cart-title mt-50">
+                <h2>Search results: {{searchKey}}</h2>
+            </div>
+
+            <div class="cart-table clearfix">
+                <table class="table table-responsive">
+
+                    <tbody>
+                        <tr *ngFor="let item of products">
+                            <td class="cart_product_img">
+                                <a href="#"><img alt="Product" [src]="item.image" /></a>
+                            </td>
+                            <td class="cart_product_desc">
+                                <h5>{{item.title}}</h5>
+                            </td>
+                            <td class="price">
+                                <span>{{item.price | currency:'USD'}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="container-fluid" *ngIf="singleProduct">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-50">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Furniture</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{singleProduct.category}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{singleProduct.title}}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-lg-7">
+            <div class="single_product_thumb">
+                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#product_details_slider" (click)="display(5)" [ngClass]="{  active: imageDisplay === 5 }" [style.background-image]="'url('+singleProduct.image+') '"></li>
+                        <li *ngFor="let item of singleProduct.listImage.slice(0,3);let i = index" data-target="#product_details_slider" (click)="display(i)" [ngClass]="{  active: imageDisplay === i }" [style.background-image]="'url('+item+') '"></li>
+
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item" [ngClass]="{ 'active': imageDisplay === 5 }">
+                            <a class="gallery_img" href="">
+                                <img class="d-block w-100" [src]="singleProduct.image" alt="First slide" />
+                            </a>
+                        </div>
+                        <div *ngFor="let item of singleProduct.listImage;let i = index" class="carousel-item" [ngClass]="{ 'active': imageDisplay === i }">
+                            <a class="gallery_img" href="">
+                                <img class="d-block w-100" [src]="item" alt="First slide" />
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5">
+            <div class="single_product_desc">
+                <!-- Product Meta Data -->
+                <div class="product-meta-data">
+                    <div class="line"></div>
+                    <p class="product-price">{{singleProduct.price | currency:'USD'}}</p>
+                    <a href="product-details.html">
+                        <h6>{{singleProduct.title}}</h6>
+                    </a>
+                    <!-- Ratings & Review -->
+                    <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                        <div class="ratings">
+                            <p-rating [readonly]="true" [(ngModel)]="singleProduct.rating.rate" [cancel]="false"></p-rating>
+                        </div>
+                        <div class="review">
+                            <a href="#">Write A Review</a>
+                        </div>
+                    </div>
+                    <!-- Avaiable -->
+                    <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                </div>
+
+                <div class="short_overview my-5">
+                    <p>
+                        {{singleProduct.description}}
+                    </p>
+                </div>
+
+                <!-- Add to Cart Form -->
+                <form class="cart clearfix" method="post">
+                    <div class="cart-btn d-flex mb-50">
+                        <p>Qty</p>
+                        <div class="quantity">
+                            <span (click)="subQty()" class="qty-minus"><i class="fa fa-caret-down" aria-hidden="true"></i
+              ></span>
+                            <input [(ngModel)]="qty" #productQty.value="ngModel" type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1" />
+                            <span (click)="addQty()" class="qty-plus"><i class="fa fa-caret-up" aria-hidden="true"></i
+              ></span>
+                        </div>
+                    </div>
+
+                    <button type="button" (click)="addToCart(singleProduct,qty)" name="addtocart" value="5" class="btn amado-btn">
+            Add to cart
+          </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

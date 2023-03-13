@@ -1,0 +1,24 @@
+<div>
+    <app-top-nav (isOpenSearch)="aaaa($event)"></app-top-nav>
+</div>
+<div class="main-content-wrapper d-flex clearfix">
+    <div class="mobile-nav">
+        <!-- Navbar Brand -->
+        <div class="amado-navbar-brand">
+            <a href="index.html"><img src="assets/image/core-img/logo.png" alt=""></a>
+        </div>
+        <!-- Navbar Toggler -->
+        <div class="amado-navbar-toggler">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    <header class="header-area clearfix">
+        <app-side-nav (isOpenSearch)="aaaa($event)"></app-side-nav>
+    </header>
+    <app-loader></app-loader>
+    <ng-content></ng-content>
+</div>
+<footer>
+    <app-bottom-nav></app-bottom-nav>
+</footer>
+<a *ngIf="scrollTopVisible" id="scrollUp" #scrollToTopBtn (click)="scrollToTop()" style="position: fixed; z-index: 2147483647; display: block;"><i class="fa fa-angle-up" aria-hidden="true"></i></a>

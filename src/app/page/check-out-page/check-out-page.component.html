@@ -1,0 +1,154 @@
+<div class="container-fluid checkout_details_area">
+    <form class="row" [formGroup]="checkOutForm" action="#" method="post" (submit)="submit()">
+        <div class="col-12 col-lg-8">
+            <div class="mt-50 clearfix">
+                <div class="cart-title">
+                    <h2>Checkout</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" [ngClass]="{ aaaa: errorMessenger.firstName }" (input)="showError(controlname.firstName)" [formControlName]="controlname.firstName" class="form-control mb-1" [id]="controlname.firstName" value="" placeholder="First Name" />
+                        <span style="color: red" *ngIf="checkError(controlname.firstName)">
+              {{ errorMessenger.firstName }}
+            </span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" [ngClass]="{ aaaa: errorMessenger.lastName }" (input)="showError(controlname.lastName)" [formControlName]="controlname.lastName" class="form-control mb-1" id="last_name" value="" placeholder="Last Name" />
+                        <span style="color: red" *ngIf="checkError(controlname.lastName)">
+              {{ errorMessenger.lastName }}
+            </span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <input type="text" [ngClass]="{ aaaa: errorMessenger.company }" (input)="showError(controlname.company)" [formControlName]="controlname.company" class="form-control mb-1" id="company" placeholder="Company Name" value="" />
+                        <span style="color: red" *ngIf="checkError(controlname.company)">
+              {{ errorMessenger.company }}
+            </span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <input type="email" [ngClass]="{ aaaa: errorMessenger.email }" (input)="showError(controlname.email)" [formControlName]="controlname.email" class="form-control mb-1" id="email" placeholder="Email" value="" />
+                        <span style="color: red" *ngIf="checkError(controlname.email)">
+              {{ errorMessenger.email }}
+            </span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <select [formControlName]="controlname.city" #aaaa (change)="checkCounty(aaaa.value)" style="
+                border: none;
+                background-color: #f5f7fa;
+                height: 60px;
+                color: #6b6b6b;
+                padding: 0 30px;
+                font-size: 15px;
+                outline: none;
+              " class="form-select w-100">
+              <option
+                *ngFor="let item of cityList"
+                style="padding: 20px"
+                [value]="item.value"
+              >
+                {{ item.city }}
+              </option>
+            </select>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <input type="text" [ngClass]="{ aaaa: errorMessenger.address }" (input)="showError(controlname.address)" [formControlName]="controlname.address" class="form-control mb-1" id="street_address" placeholder="Address" value="" />
+                        <span style="color: red" *ngIf="checkError(controlname.address)">
+              {{ errorMessenger.address }}
+            </span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <input type="text" [ngClass]="{ aaaa: errorMessenger.town }" (input)="showError(controlname.town)" [formControlName]="controlname.town" class="form-control mb-1" id="city" placeholder="Town" value="" />
+                        <span style="color: red" *ngIf="checkError(controlname.town)">
+              {{ errorMessenger.town }}
+            </span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" [ngClass]="{ aaaa: errorMessenger.zipcode }" (input)="showError(controlname.zipcode)" [formControlName]="controlname.zipcode" class="form-control mb-1" id="zipCode" placeholder="Zip Code" value="" />
+                        <span style="color: red" *ngIf="checkError(controlname.zipcode)">
+              {{ errorMessenger.zipcode }}
+            </span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="number" [ngClass]="{ aaaa: errorMessenger.phoneNumber }" (input)="showError(controlname.phoneNumber)" [formControlName]="controlname.phoneNumber" class="form-control mb-1" id="phone_number" min="0" placeholder="Phone No" value="" />
+                        <span style="color: red" *ngIf="checkError(controlname.phoneNumber)">
+              {{ errorMessenger.phoneNumber }}
+            </span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <textarea name="comment" [formControlName]="controlname.comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="custom-control custom-checkbox d-block mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck2" [formControlName]="controlname.isCreateNewAccount" />
+                            <label class="custom-control-label" for="customCheck2">Create an accout</label
+              >
+            </div>
+            <div class="custom-control custom-checkbox d-block">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customCheck3"
+                [formControlName]="controlname.shipToAdiffrentAddress"
+              />
+              <label class="custom-control-label" for="customCheck3"
+                >Ship to a different address</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="cart-summary">
+        <h5>Cart Total</h5>
+        <ul class="summary-table">
+          <li>
+            <span>subtotal:</span>
+            <span>{{ totalPrice | currency : "USD" }}</span>
+          </li>
+          <li><span>delivery:</span> <span>Free</span></li>
+          <li>
+            <span>total:</span> <span>{{ totalPrice | currency : "USD" }}</span>
+          </li>
+        </ul>
+
+        <div class="payment-method">
+          <!-- Cash on delivery -->
+          <div class="custom-control custom-checkbox mr-sm-2">
+            <input
+              type="radio"
+              class="custom-control-input"
+              id="cod"
+              name="paymentMethod"
+              (click)="getPaymentmethod('cod')"
+            />
+            <label class="custom-control-label" for="cod"
+              >Cash on Delivery</label
+            >
+          </div>
+          <!-- Paypal -->
+          <div class="custom-control custom-checkbox mr-sm-2">
+            <input
+              name="paymentMethod"
+              type="radio"
+              class="custom-control-input"
+              id="paypal"
+              (click)="getPaymentmethod('paypal')"
+            />
+            <label class="custom-control-label" for="paypal"
+              >Paypal <img class="ml-15" src="img/core-img/paypal.png" alt=""
+            /></label>
+                        </div>
+                        <span style="color: red" *ngIf="checkError(controlname.paymentMethod)">
+            Pick one
+          </span>
+                    </div>
+
+                    <div class="cart-btn mt-100">
+                        <button type="submit" class="btn amado-btn w-100">Checkout</button>
+                    </div>
+                </div>
+            </div>
+    </form>
+    </div>

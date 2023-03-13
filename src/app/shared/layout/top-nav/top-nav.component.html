@@ -1,0 +1,31 @@
+<!-- Search Wrapper Area Start -->
+
+<div (click)="closeSearchNav()" class="search-close">
+    <i class="fa fa-close" aria-hidden="true"></i>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="search-content">
+                <div class="search-content-input">
+                    <input #searchKey type="search" name="search" id="search" placeholder="Type your keyword..." />
+                    <button type="button" (click)="gotoSearchPageResult()">
+            <img src="assets/image/core-img/search.png" alt="" />
+          </button>
+                </div>
+                <div *ngIf="searchResult.length > 0" class="search-content-result">
+                    <div class="row result-item" *ngFor="let item of searchResult" (click)="goTodetailProduct(item.id)">
+                        <div class="col-4 d-flex justify-content-center p-3"><img width="50%" [src]="item.image" /></div>
+                        <div class="col-8">
+                            <h4>{{ item.title }}</h4>
+                            <h6>{{ item.price | currency:'USD' }}</h6>
+                            <span>{{ item.category }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Wrapper Area End -->

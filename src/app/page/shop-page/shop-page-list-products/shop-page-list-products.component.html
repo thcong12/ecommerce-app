@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-12">
+        <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+            <!-- Total Products -->
+            <div class="total-products">
+                <p>
+                    Showing {{ productInpage * (currentPage - 1) + 1 }}-{{ currentPage * productInpage }} 0f {{ products.length }}
+                </p>
+                <div class="view d-flex">
+                    <a (click)="gridView()" [ngClass]="{ active: isGridDisplay == true }"><i class="fa fa-th-large" aria-hidden="true"></i
+          ></a>
+                    <a (click)="listView()" [ngClass]="{ active: isGridDisplay == false }"><i class="fa fa-bars" aria-hidden="true"></i
+          ></a>
+                </div>
+            </div>
+            <!-- Sorting -->
+            <div class="product-sorting d-flex">
+                <div class="sort-by-date d-flex align-items-center mr-15">
+                    <p>Sort by</p>
+                    <form action="#" method="get">
+                        <select name="select" id="sortBydate">
+              <option value="value">Date</option>
+              <option value="value">Newest</option>
+              <option value="value">Popular</option>
+            </select>
+                    </form>
+                </div>
+                <div class="view-product d-flex align-items-center">
+                    <p>View</p>
+
+                    <form action="#" method="get">
+                        <select [(ngModel)]="productInpage" name="select" id="viewProduct" #productInpage.value="ngModel">
+              <option *ngFor="let item of optionPageChange" [value]="item">
+                {{ item }}
+              </option>
+            </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isGridDisplay" class="row">
+    <!-- Single Product Area -->
+    <div *ngFor="
+      let item of products.slice(
+        productInpage * (currentPage - 1),
+        currentPage * productInpage
+      )
+    " class="col-12 col-sm-6 col-md-12 col-xl-6">
+        <div class="single-product-wrapper">
+            <!-- Product Image -->
+            <div class="product-img" [routerLink]="'/product/' + item.id">
+                <img [src]="item.image" alt="" />
+                <!-- Hover Thumb -->
+                <img class="hover-img" [src]="item.image" alt="" />
+            </div>
+
+            <!-- Product Description -->
+            <div class="product-description d-flex align-items-center justify-content-between">
+                <!-- Product Meta Data -->
+                <div class="product-meta-data">
+                    <div class="line"></div>
+                    <p class="product-price">{{ item.price | currency : "USD" }}</p>
+                    <a [routerLink]="'/product/' + item.id">
+                        <h6>{{ item.title }}</h6>
+                    </a>
+                </div>
+                <!-- Ratings & Cart -->
+                <div class="ratings-cart text-right">
+                    <div class="ratings">
+                        <p-rating [readonly]="true" [cancel]="false" [(ngModel)]="item.rating.rate"></p-rating>
+                    </div>
+                    <div class="cart">
+                        <a data-toggle="tooltip" (click)="addtoCart(item)" data-placement="left" title="Add to Cart"><img src="assets/image/core-img/cart.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid listView" *ngIf="!isGridDisplay">
+    <div class="row">
+        <div class="col-12">
+            <div class="cart-table clearfix">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr [routerLink]="'/product/' + item.id" *ngFor="
+                let item of products.slice(
+                  productInpage * (currentPage - 1),
+                  currentPage * productInpage
+                );
+                let i = index
+              ">
+                            <td class="cart_product_img">
+                                <a><img [src]="item.image" alt="Product" /></a>
+                            </td>
+                            <td class="cart_product_desc">
+                                <h5>{{ item.title }}</h5>
+                            </td>
+                            <td class="price">
+                                <span>{{ item.price | currency : "USD" }}</span>
+                            </td>
+                            <td>
+                                <div class="ratings-cart text-right">
+                                    <div class="ratings" style="color: #fbb710">
+                                        <p-rating [readonly]="true" [cancel]="false" [(ngModel)]="item.rating.rate"></p-rating>
+                                    </div>
+                                    <div class="cart">
+                                        <a data-toggle="tooltip" (click)="addtoCart(item)" data-placement="left" title="Add to Cart"><img src="assets/image/core-img/cart.png" alt="" /></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-end">
+    <p-paginator styleClass="col-12 " (onPageChange)="paginate($event)" [showFirstLastIcon]="false" [rows]="productInpage" [totalRecords]="products.length"></p-paginator>
+</div>

@@ -1,0 +1,57 @@
+:host ::ng-deep .p-paginator {
+    position: relative;
+    z-index: 1;
+    .p-paginator-next,
+    .p-paginator-prev {
+        display: none;
+    }
+    .p-paginator-pages {
+        .p-link {
+            border-radius: 0;
+            width: 40px;
+            height: 40px;
+            border: none;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 40px;
+            padding: 0;
+            text-align: center;
+            color: #242424;
+            &:hover,
+            &:focus {
+                color: #fff;
+                box-shadow: none;
+                background-color: #fbb710;
+            }
+        }
+        .p-highlight {
+            color: #fff;
+            box-shadow: none;
+            background-color: #fbb710;
+        }
+    }
+}
+
+:host ::ng-deep .p-slider {
+    background-color: #c7d2d8 !important;
+    height: 2px;
+    border: none;
+    .p-slider-handle {
+        background-color: #fff;
+        top: -7px;
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        border: 2px solid #fbb710;
+        border-radius: 50%;
+    }
+    .p-slider-range {
+        background-color: #fbb710;
+    }
+}
+
+:host ::ng-deep .p-rating {
+    .pi-star-fill {
+        color: #fbb710;
+    }
+}

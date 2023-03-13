@@ -1,0 +1,63 @@
+<!-- ##### Single Widget ##### -->
+<div class="widget catagory mb-50">
+    <!-- Widget Title -->
+    <h6 class="widget-title mb-30">Catagories</h6>
+
+    <!--  Catagories  -->
+    <div class="catagories-menu">
+        <ul>
+            <li>
+                <a (click)="getData()">All</a>
+            </li>
+            <li *ngFor="let item of category.slice(0,4)">
+                <a (click)="getProductByCategory(item.value)">{{ item.title }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- ##### Single Widget ##### -->
+<div class="widget brands mb-50">
+    <!-- Widget Title -->
+    <h6 class="widget-title mb-30">Brands</h6>
+
+    <div class="widget-desc">
+        <!-- Single Form Check -->
+        <div *ngFor="let item of brand" class="form-check">
+            <input class="form-check-input" type="checkbox" #brand (change)="addBrand(brand.value)" [value]="item.name" [id]="item.id" />
+            <label class="form-check-label" for="amado">{{item.name}}</label>
+        </div>
+        <!-- Single Form Check -->
+
+    </div>
+</div>
+
+<!-- ##### Single Widget ##### -->
+<div class="widget color mb-50">
+    <!-- Widget Title -->
+    <h6 class="widget-title mb-30">Color</h6>
+
+    <div class="widget-desc">
+        <ul class="d-flex">
+            <li *ngFor="let item of colorList" style="cursor: pointer;">
+                <a (click)="getProductByColor(item.class)" [className]="item.class"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- ##### Single Widget ##### -->
+<div class="widget price mb-50">
+    <!-- Widget Title -->
+
+    <h6 class="widget-title mb-30">Price</h6>
+
+    <div class="widget-desc">
+        <div class="slider-range">
+            <div class="range-price">
+                {{ rangeValues[0] | currency : "USD" }} - {{ rangeValues[1] | currency : "USD" }}
+            </div>
+            <p-slider (onChange)="handleChange($event)" [max]="1000" [(ngModel)]="rangeValues" [range]="true"></p-slider>
+        </div>
+    </div>
+</div>
